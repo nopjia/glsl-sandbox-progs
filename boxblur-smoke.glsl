@@ -1,5 +1,5 @@
 // Procedural Smoke
-// http://glsl.heroku.com/e#5127.0
+// https://glsl.heroku.com/e#5127.2
 
 // By Nop Jiarathanakul
 // http://www.iamnop.com/
@@ -8,23 +8,38 @@
 precision highp float;
 #endif
 
-/* NUMERICAL CONSTANTS */
-#define EPS       0.001
-#define EPS1      0.01
-#define PI        3.1415926535897932
-#define HALFPI    1.5707963267948966
-#define QUARTPI   0.7853981633974483
-#define ROOTTHREE 0.57735027
-#define HUGEVAL   1e20
+//---------------------------------------------------------
+// MACROS
+//---------------------------------------------------------
+
+#define EPS       0.0001
+#define PI        3.14159265
+#define HALFPI    1.57079633
+#define ROOTTHREE 1.73205081
+
+#define EQUALS(A,B) ( abs((A)-(B)) < EPS )
+#define EQUALSZERO(A) ( ((A)<EPS) && ((A)>-EPS) )
+
+//---------------------------------------------------------
+// UNIFORMS
+//---------------------------------------------------------
 
 uniform float time;
 uniform vec2 mouse;
 uniform vec2 resolution;
 uniform sampler2D backbuffer;
 
+//---------------------------------------------------------
+// GLOBALS
+//---------------------------------------------------------
+
 vec2 origin = vec2(0.0);
 vec2 uv, pos, pmouse;
 float aspect;
+
+//---------------------------------------------------------
+// UTILS
+//---------------------------------------------------------
 
 // source: http://stackoverflow.com/questions/4200224/random-noise-functions-for-glsl
 float rand(in vec2 seed) {
@@ -54,6 +69,10 @@ float rect (vec2 center, vec2 b) {
         ) ? 
         1.0 : 0.0;
 }
+
+//---------------------------------------------------------
+// PROGRAM
+//---------------------------------------------------------
 
 // create smoke from blurring backbuffer
 vec3 ghostSmoke() {
@@ -142,8 +161,9 @@ void main( void ) {
 
 
 
-
-
+//---------------------------------------------------------
+// NOISE FUNCTIONS
+//---------------------------------------------------------
 
 /*
  * Description : Array and textureless GLSL 2D/3D/4D simplex 

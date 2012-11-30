@@ -1,5 +1,6 @@
 // Conway's Game of Life
 // data stored alpha channel
+// https://glsl.heroku.com/e#5129.2
 
 // By Nop Jiarathanakul
 // http://www.iamnop.com/
